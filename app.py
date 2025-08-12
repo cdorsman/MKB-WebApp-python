@@ -6,7 +6,7 @@ def create_app():
 
     @app.route('/')
     def hello():
-        return 'Hello, Azure App Services!'
+        return '<h1>Hello, MKB-bedrijf!</h1>'
 
     return app
 
