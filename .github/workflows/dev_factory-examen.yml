@@ -66,6 +66,7 @@ jobs:
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'factory-webapp'
+          app-name: 'factory-examen'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_02E03102FE26484BA078C88C617285F3 }}
           package: .
+
