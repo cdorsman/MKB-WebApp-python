@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 
@@ -8,7 +8,7 @@ FlaskInstrumentor().instrument_app(app)
 
 @app.route('/')
 def hello():
-    return '<h1>Hello, MKB-bedrijf!</h1>'
+    return render_template('index.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
