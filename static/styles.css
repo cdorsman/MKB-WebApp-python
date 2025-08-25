@@ -1,0 +1,123 @@
+body {
+        background-color: #FAF9F6;
+        padding: 0px;
+        margin: 0px;
+}
+    
+header {
+    position: absolute;
+    width: 100%;
+    background-color: #FAF9F6;
+    color: white;
+    height: 65px;
+    top: 0px;
+}
+
+header h1 {
+    position: fixed;
+    font-size: 32px;
+    width: 214px;
+    margin-top: 70px;
+    right: 2%;
+    top: -62px;
+    padding: 12px;
+    color: #FAF9F6;
+    background-color: #666;
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul li {
+    float: right;
+    position: relative;
+    top: 10px;
+    right: 18%;
+    margin-left: 60px;
+    text-decoration: none;
+    color: #666;
+    display: inline;
+
+}
+
+nav a {
+    text-decoration: none;
+    top: 0px;
+    color: #666;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+    display: inline;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.logo {
+    position: fixed;
+    right: 10%;
+    top: -33px;
+    border: 2px solid #666;
+    color: #666;
+    margin: 40px;
+    width: 80px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 50px;
+}
+
+.row {
+    width: 100%;
+    min-height: 300px; /* Ensures row is visible */
+    margin-top: 65px; /* Pushes content below header */
+    position: relative;
+}
+
+.column {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.left, .right {
+    width: 25%;
+    min-height: 300px; /* Ensures columns are visible */
+}
+
+
+.content {
+    width: 50%;
+    color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+    min-height: 300px; /* Ensures content is visible */
+}
+
+p {
+    color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 100px;
+    background-color: #FAF9F6;
+    color: #666;
+    text-align: center;
+    padding-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+
+
