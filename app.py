@@ -1,11 +1,15 @@
 from flask import Flask, render_template
 import os
+import logging
 from opentelemetry import trace
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Define service name for Azure Monitor
 resource = Resource.create({"service.name": "flask-otel-app"})
