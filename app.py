@@ -17,7 +17,7 @@ tracer = trace.get_tracer(__name__)
 
 # Configure Azure Monitor exporter for Application Insights
 azure_monitor_exporter = AzureMonitorTraceExporter(
-    connection_string="InstrumentationKey=ee87ce4a-c4e3-4504-99dd-9cc52106c6bb;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westus2.livediagnostics.monitor.azure.com/;ApplicationId=4f53851c-114a-42fe-9728-320be0a645c3"
+    connection_string="InstrumentationKey=a62c30e2-b1f3-461a-a6c4-9a624d0c1097;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westus2.livediagnostics.monitor.azure.com/;ApplicationId=fffc2979-ffae-4939-ad23-e0bbb37b4a07"
 )
 
 span_processor = BatchSpanProcessor(azure_monitor_exporter)
