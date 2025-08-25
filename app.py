@@ -1,37 +1,35 @@
 from flask import Flask, render_template
 import os
-import logging
 from opentelemetry import trace
-from opentelemetry.sdk.resources import Resource
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
+from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# Define service name for Azure Monitor
-resource = Resource.create({"service.name": "flask-otel-app"})
-
-# Configure tracer provider
-provider = TracerProvider(resource=resource)
-trace.set_tracer_provider(provider)
-tracer = trace.get_tracer(__name__)
-
-# Configure Azure Monitor exporter for Application Insights
-conn_str: str = os.getenv('APPLICATION_INSIGHTS_CONN_STR', '')
-
-if conn_str == '':
-    raise ValueError("No Application Insights connection string provided.")
-
-azure_monitor_exporter = AzureMonitorTraceExporter().from_connection_string(conn_str)
-span_processor = BatchSpanProcessor(azure_monitor_exporter)
-provider.add_span_processor(span_processor)
 
 app = Flask(__name__)
+trace.set_tracer_provider(
+    TracerProvider(
+        resource=Resource.create({SERVICE_NAME: "MKB-WebApp"})
+    )
+)
 
+# Enable tracing for Flask library
 FlaskInstrumentor().instrument_app(app)
+
+# Enable tracing for requests library
+RequestsInstrumentor().instrument
+
+trace_exporter = AzureMonitorTraceExporter(
+    connection_string=os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
+)
+
+trace.get_tracer_provider().add_span_processor(
+    BatchSpanProcessor(trace_exporter)
+)
+
 
 @app.route('/')
 def index():
