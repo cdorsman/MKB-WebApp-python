@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import os
+from config import Config
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
@@ -10,11 +11,10 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 
 app = Flask(__name__)
-trace.set_tracer_provider(
-    TracerProvider(
-        resource=Resource.create({SERVICE_NAME: "MKB-WebApp"})
-    )
+tracer_provider = TracerProvider(
+    resource=Resource.create({SERVICE_NAME: "MKB-WebApp"})
 )
+trace.set_tracer_provider(tracer_provider)
 
 # Enable tracing for Flask library
 FlaskInstrumentor().instrument_app(app)
@@ -23,13 +23,12 @@ FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument
 
 trace_exporter = AzureMonitorTraceExporter(
-    connection_string=os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
+    connection_string=Config.CONNECTION_STRING
 )
 
-trace.get_tracer_provider().add_span_processor(
+tracer_provider.add_span_processor(
     BatchSpanProcessor(trace_exporter)
 )
-
 
 @app.route('/')
 def index():
