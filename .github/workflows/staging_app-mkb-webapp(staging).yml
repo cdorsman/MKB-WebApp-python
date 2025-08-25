@@ -7,11 +7,7 @@ name: Build and deploy Python app to Azure Web App - app-mkb-webapp
 on:
   push:
     branches:
-<<<<<<<< HEAD:.github/workflows/staging_app-mkb-webapp(staging).yml
       - staging
-========
-      - acc
->>>>>>>> 28986244e15d234bd5a280aa171349d26acf354c:.github/workflows/acc_app-mkb-webapp(acc).yml
   workflow_dispatch:
 
 jobs:
@@ -61,10 +57,6 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'app-mkb-webapp'
-<<<<<<<< HEAD:.github/workflows/staging_app-mkb-webapp(staging).yml
           slot-name: 'staging'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ED593EC9230340E2A60124066B0CF4EF }}
-========
-          slot-name: 'acc'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8DD3BC63148B4107843E35DF9586830A }}
->>>>>>>> 28986244e15d234bd5a280aa171349d26acf354c:.github/workflows/acc_app-mkb-webapp(acc).yml
+
