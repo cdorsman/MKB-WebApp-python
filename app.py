@@ -16,10 +16,12 @@ trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
 # Configure Azure Monitor exporter for Application Insights
-azure_monitor_exporter = AzureMonitorTraceExporter(
-    connection_string="InstrumentationKey=a62c30e2-b1f3-461a-a6c4-9a624d0c1097;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westus2.livediagnostics.monitor.azure.com/;ApplicationId=fffc2979-ffae-4939-ad23-e0bbb37b4a07"
-)
+conn_str: str = os.getenv('APPLICATION_INSIGHTS_CONN_STR', '')
 
+if conn_str == '':
+    raise ValueError("No Application Insights connection string provided.")
+
+azure_monitor_exporter = AzureMonitorTraceExporter().from_connection_string(conn_str)
 span_processor = BatchSpanProcessor(azure_monitor_exporter)
 provider.add_span_processor(span_processor)
 
