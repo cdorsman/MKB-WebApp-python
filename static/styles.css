@@ -84,7 +84,6 @@ nav a {
     min-height: 300px; /* Ensures columns are visible */
 }
 
-
 .content {
     width: 50%;
     color: #666;
@@ -104,7 +103,6 @@ p {
   display: table;
   clear: both;
 }
-
 
 footer {
     position: absolute;
